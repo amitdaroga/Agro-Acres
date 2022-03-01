@@ -1,0 +1,86 @@
+{% extends 'main.html' %}
+{%load static %}
+{% block content %}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <section class="content">
+                <!-- Default box -->
+                <div class="card card-solid">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-sm-6">
+                                <h3 class="d-inline-block d-sm-none">LOWA Men’s Renegade GTX Mid Hiking Boots Review</h3>
+                                <div class="col-12">
+                                    <img src="{{pro.pic.url}}" class="product-image" alt="Product Image">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <h2>product Details</h2>
+                                <div class="mt-4">
+                                    <div class="form-group">
+                                        <label>product Name</label>
+                                        <input type="text" class="form-control" value="{{pro.product_name}}" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>product category</label>
+                                        <input type="text" class="form-control" value="{{pro.pro_category}}" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>product Price</label>
+                                        <input type="text" class="form-control" value="{{pro.Price}}" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>product quantity</label>
+                                        <input type="text" class="form-control" placeholder="Enter Product quantity"  min="1" max="20" onkeyup="mult(this.value,this.price='{{pro.Price}}');"  value="1"required>
+                                    </div>
+                                    
+                                </div>
+                                <form action="{% url 'payment_cus' %}" method="post">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label>Total Price</label>
+                                        <input type="text" class="form-control"  name="totalpri" id="pir" value="{{pro.Price}}" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="hidden" class="form-control" name="pquantity" placeholder="Enter Product quantity"  min="1" max="20" id="p"  value="1"required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="hidden" class="form-control" name="pid" placeholder="Enter Product id "  min="1" max="20" id="p"  value="{{pro.id}}"required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Address</label>
+                                        <input type="text" class="form-control" name="address"  min="1" max="20" value="{{cus.address}}"required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>city</label>
+                                        <input type="text" class="form-control" name="city" min="1" max="20"   value="{{cus.city}}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Pincode</label>
+                                        <input type="number" class="form-control" name="pin" value="{{cus.pincode}}"required>
+                                    </div>
+                                    <div>
+                                        <input type="submit" class="btn btn-primary btn-lg btn-flat"style="text-align: center;width: 100%;">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </section>
+        </div>
+    </div>
+</div>
+<script>
+    function mult(value,price){
+        var x;
+        x=value*price
+        document.getElementById('pir').value=x
+        document.getElementById('p').value=value
+    }
+</script>
+{% endblock %}

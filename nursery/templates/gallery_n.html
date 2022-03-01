@@ -1,0 +1,69 @@
+{% extends 'main_n.html' %}
+{%load static %}
+{% block content %}
+<style>
+    div.gallery {
+        margin: 3px;
+        border: 1px solid #ccc;
+        float: left;
+        width: 180px;
+    } 
+    div.gallery:hover {
+        border: 1px solid #777;
+    }
+    div.gallery img {
+        width: 100%;
+        height: 80%;
+    }
+    div.desc {
+        padding: 15px;
+        text-align: center;
+    }
+    input[type=text]{
+        width: 250px;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        background-color: white;
+        background-position: 10px 10px; 
+        background-repeat: no-repeat;
+        padding: 12px 20px 12px 40px;
+        -webkit-transition: width 0.4s ease-in-out;
+        transition: width 0.4s ease-in-out;
+    }
+    input[type=text]:focus {
+        width: 100%;
+    }
+</style>
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <form action="{% url 'gallery_n' %}" method="POST" style="text-align: center;">
+                {% csrf_token %}
+                <input type="text" name="search" placeholder="Enter Product Name">
+            </form><br>
+            {% if search_id %}
+            {% for i in search_id %}
+            <div class="gallery" style="height: 400px; width: 300px;">
+                <a href="{% url 'p_details_n' pk=i.id %}" >
+                    <img src="{{i.pic.url}}" alt="Cinque Terre" >
+                </a>
+                <div class="desc">{{i.product_name}}<br>RS.{{i.Price}}</div>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% if pro %}
+            {% for i in pro %}
+            <div class="gallery" style="height: 400px; width: 300px;">
+                <a href="{% url 'p_details_n' pk=i.id %}" >
+                    <img src="{{i.pic.url}}" alt="Cinque Terre" >
+                </a>
+                <div class="desc">{{i.product_name}}<br>RS.{{i.Price}}</div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

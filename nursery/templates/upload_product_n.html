@@ -1,0 +1,84 @@
+{% extends 'main_n.html' %}
+{%load static %}
+{% block content %}
+<div class="content-wrapper" >
+	<!-- Content Header (Page header) -->
+	<div class="content-header">
+		<div class="container-fluid">
+			<section class="content">
+				<div class="container-fluid">
+					<div class="card card-default">
+						<div class="card-header">
+							<h3 class="card-title">Product Details</h3>
+						</div>
+						<!-- /.card-header -->
+						<form action="{% url 'upload_product_n' %}" method="post" enctype="multipart/form-data">
+							{% csrf_token %}
+							{% if msg %}
+							<p style="color: black; font-size: 20px; text-align: center;"><b>{{msg}}</b><hr></p>
+							{% endif %}
+							<div class="card-body">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>product category</label>
+											<select class="form-control" name="pcategory" style="text-align: center;">
+												<option value="Angiosperms">Angiosperms</option>
+												<option value="Trees">Trees</option>
+												
+											</select>
+										</div>
+										<!-- /.form-group -->
+										<div class="form-group">
+											<label>product name</label>
+											<input type="text" name="pname" class="form-control" id="exampleInputPassword1" placeholder="Enter product Name">
+										</div>
+										<div class="row">
+											<div class="col-12 col-sm-12">
+												<div class="form-group">
+													<label>Product Description</label>
+													<textarea id="inputDescription" name="pdescription" class="form-control" rows="4"></textarea>
+												</div>
+												<!-- /.form-group -->
+											</div>
+											<!-- /.col -->
+											<!-- /.col -->
+										</div>
+										<!-- /.form-group -->
+									</div>
+									<!-- /.col -->
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Product Price</label>
+											<input type="number" name="price"  class="form-control" placeholder="Enter product price " style="width: 100%;">
+										</div>
+										<!-- /.form-group -->
+										<div class="form-group">
+											<label>product quantity</label>
+											<input type="number" name="pquantity" class="form-control" id="exampleInputPassword1" placeholder="Enter product quantity">
+										</div>
+										<div class="form-group">
+											<label>product Image</label>
+											<input type="file" name="pic">
+										</div>
+										<!-- /.form-group -->
+									</div>
+									<!-- /.col -->
+								</div>
+								<!-- /.row -->
+								
+								<div>
+									<input type="submit" name="submit" class="btn btn-primary" value="Submit" style="width: 100%;">
+								</div>
+							</div>
+							<!-- /.card-body -->
+						</form>
+						<!-- /.row -->
+					</div>
+					<!-- /.card-body -->
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+{% endblock%}

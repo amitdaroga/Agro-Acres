@@ -1,0 +1,81 @@
+{% extends 'main.html' %}
+{%load static %}
+{% block content %}
+<div class="content-wrapper">
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="card-body p-0">
+        <table class="table table-striped projects">
+          <thead>
+            <tr>
+              <th class="text-center" >
+                product image
+              </th>
+              <th class="text-center" >
+                product Name
+              </th>
+              <th class="text-center" >
+                product Description
+              </th>
+              <th class="text-center" >
+                product category
+              </th>
+              <th class="text-center">
+                product Price
+              </th>
+              <th class="text-center">
+                product Quantity
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in wishlist %}
+            <tr>
+              <td class="text-center" >
+                <p>
+                  <a href="{{i.p_id.pic.url}}">
+                  <img src="{{i.p_id.pic.url}}" height="60" width="60" style="border-radius: 50%;" >
+                </a>
+                </p>
+              </td>
+              <td class="text-center" >
+                  <p>
+                    {{i.p_id.product_name}} 
+                  </p>
+              </td>
+              <td class="text-center" >
+                <p>
+                  {{i.p_id.pro_description}}
+                </p> 
+              </td>
+              <td class="text-center" >
+                <p>
+                  {{i.p_id.pro_category}}
+                </p>
+              </td>
+              <td class="text-center">
+                
+                <p>
+                  {{i.p_id.Price}}
+                </p>
+              </td>
+              <td class="text-center" >  
+                <p>
+                 {{i.p_id.pro_quantity}}
+                </p>
+              </td>
+              <td class="project-actions text-right">
+                <a class="btn btn-info btn-sm" href="{% url 'p_details_f' pk=i.p_id.id %}">
+                  show Product 
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <!-- /.card-body -->
+    </div>
+  </div>
+</div>
+{% endblock %}

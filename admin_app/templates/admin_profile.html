@@ -1,0 +1,328 @@
+{% extends 'main_admin.html' %}
+{%load static %}
+{% block content %}
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+/* Full-width input fields */
+input[type=text], input[type=password],input[type=submit],input[type=date]{
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid rgb(20, 20, 20);
+  box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 50%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+/* Center the image and position the close button */
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+  position: relative;
+}
+
+img.avatar {
+  width: 20%;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 20%;
+  top: 0;
+  width: 70%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)} 
+  to {-webkit-transform: scale(1)}
+}
+  
+@keyframes animatezoom {
+  from {transform: scale(0)} 
+  to {transform: scale(1)}
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+}
+</style>
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="card mb-4">
+                <div class="card-body text-center">
+                  <img src="{{admin.img.url}}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                  <h5 class="my-3">{{admin.first_name}} {{admin.last_name}}</h5>
+                  <p class="text-muted mb-1">HELLO FRIENDS I AM Admin</p>
+                  <div class="d-flex justify-content-center mb-2">
+                    <button type="button" class="btn btn-primary"onclick="document.getElementById('id02').style.display='block'" style="width:100%;">Edit Profile </button>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-4 mb-lg-0">
+                <div class="card-body p-0">
+                  <ul class="list-group list-group-flush rounded-3">
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                      <i class="fas fa-globe fa-lg text-warning"></i>
+                      <p class="mb-0">https://mdbootstrap.com</p>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                      <i class="fab fa-github fa-lg" style="color: #333333;"></i>
+                      <p class="mb-0">mdbootstrap</p>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                      <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
+                      <p class="mb-0">@mdbootstrap</p>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                      <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
+                      <p class="mb-0">mdbootstrap</p>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                      <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
+                      <p class="mb-0">mdbootstrap</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="card mb-4">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Full Name</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <div class="text-muted mb-0 ">
+                        <p>{{admin.first_name}} {{admin.last_name}}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Email</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <div class="text-muted mb-0 ">
+                        <p>{{admin.email}}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Phone</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{admin.phone}}</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Address</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{admin.address}}</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Date of birth</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{admin.dod}}</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="d-flex justify-content-center mb-2">
+                    <button type="button" class="btn btn-primary"onclick="document.getElementById('id01').style.display='block'" style="width:100%;">Edit Details </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    <div id="id01" class="modal">
+      
+      <form class="modal-content animate" method="post" action="{% url 'editprofile_admin' %}" enctype="multipart/form-data"  >
+        {% csrf_token %}
+        <div class="imgcontainer">
+          <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+          <img src="{{admin.img.url}}" alt="Avatar" class="avatar">
+        </div>
+
+        <div class="container floating-form">
+          <div class="form-group" style="margin-left: 25% ;">
+            <label>Role</label><br>
+            <input type="text" class="form-control" placeholder=Admin readonly/>
+          </div>
+          <div class="form-group" style="margin-left: 25% ;">
+            <label>First Name</label><br>
+           <input type="text" name="fname" class="form-control" value={{admin.first_name}}>
+          </div>
+          <div class="form-group" style="margin-left: 25% ;">
+            <label>Last Name</label><br>
+           <input type="text" name="lname" class="form-control" value={{admin.last_name}}>
+          </div>
+           <div class="form-group" style="margin-left: 25% ;">
+            <label>Email id</label><br>
+           <input type="text" name="email" class="form-control" value={{admin.email}}>
+          </div>
+          <div class="form-group" style="margin-left: 25% ;">
+            <label>Contact Number</label><br>
+           <input type="text" name="phone" class="form-control" value={{admin.phone}}>
+          </div>
+          <div class="form-group" style="margin-left: 25% ;">
+            <label>Address</label><br>
+           <input type="text" name="address" class="form-control" value={{admin.address}}>
+          </div>
+          <div class="form-group" style="margin-left: 25% ;">
+            <label>Country</label><br>
+           <input type="text" name="country" class="form-control" value={{admin.country}} >
+          </div>
+          <div class="form-group" style="margin-left: 25% ;">
+            <label>Date of birth</label><br>
+           <input type="date" name="dob" class="form-control" value={{admin.dod}} >
+          </div>
+          <div class="form-group" style="margin-left: 25% ;">
+            <label>city</label><br>
+           <input type="text" name="city" class="form-control" value={{admin.city}}>
+          </div>
+          <div class="form-group" style="margin-left: 25% ;">
+            <label>Pin code</label><br>
+           <input type="text" name="pincode" class="form-control" value={{admin.pincode}}>
+          </div>
+          <div class="form-group" style="margin-left: 25% ;">
+           <input type="submit" class="form-control" style="background-color: rgb(26, 46, 138);color: white; " value="Submit" />
+          </div>
+        </div>
+        <div class="container" style="background-color:#f1f1f1">
+          <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+        </div>
+      </form>
+    </div>
+    <div id="id02" class="modal">
+      
+      <form class="modal-content animate" method="post" action="{% url 'editimg_admin' %}" enctype="multipart/form-data"  >
+        {% csrf_token %}
+        <div class="imgcontainer">
+          <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+          <img src="{{admin.img.url}}" alt="Avatar" class="avatar">
+        </div>
+
+        <div class="container floating-form">
+          <div class="form-group" style="margin-left: 25% ;">
+            <label>Edit Profile</label><br>
+            <input type="file" name='pic' >
+          </div>
+          <div class="form-group" style="margin-left: 25% ;">
+           <input type="submit" class="form-control" style="background-color: rgb(26, 46, 138);color: white; " value="Submit" />
+          </div>
+        </div>
+        <div class="container" style="background-color:#f1f1f1">
+          <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+    </div>
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById('id01');
+var modal = document.getElementById('id02');
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+{% endblock%}

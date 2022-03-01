@@ -1,0 +1,61 @@
+{% extends 'main_admin.html' %}
+{%load static %}
+{% block content %}
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="card-body p-0">
+          <h3 style="text-align: center;">Product Details</h3>
+          <table class="table table-striped projects">
+              <thead>
+                  <tr>
+                      <th>
+                           Name
+                      </th>
+                      <th >
+                          category
+                      </th>
+                      <th>
+                          Price
+                      </th>
+                      <th>
+                          Quantity
+                      </th>
+                      <th>
+                          Enable OR Disable
+                      </th>
+                      <th>
+                          Image
+                      </th>
+                  </tr>
+              </thead>
+              <tbody>
+                {% for i in pro %}
+                  <tr>
+                      <td>
+                        {{i.product_name}} 
+                      </td>
+                      <td>
+                        {{i.pro_category}}
+                      </td>
+                      <td>
+                        {{i.Price}}
+                      </td>
+                      <td>
+                        {{i.pro_quantity}}
+                      </td>
+                      <td>
+                        {{i.enable}}
+                      </td>
+                      <td>
+                        <img src="{{i.pic.url}}" width="100px" height="100px">
+                      </td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+{% endblock %}

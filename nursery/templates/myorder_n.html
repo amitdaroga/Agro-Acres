@@ -1,0 +1,121 @@
+{% extends 'main_n.html' %}
+{%load static %}
+{% block content %}
+<style> 
+input[type=search] {
+  width: 250px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 5px 20px 1px 5px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+input[type=search]:focus {
+  width: 100%;
+}
+</style>
+  
+<div class="content-wrapper">
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="card-body p-0">
+        <!-- <form action="{% url 'my_product_a' %}" method="POST">
+          {% csrf_token %}
+          <input type="search" id="myInput" onkeyup="myFunction()" placeholder="Enter Product Name.." name='search' title="Type in a name">
+        </form> -->
+        <table class="table table-striped projects" id="myTable">
+          <thead>
+            <tr>
+              <th class="text-center" >
+                or_id
+              </th>
+              <th class="text-center">
+                Total Price
+              </th>
+              <th class="text-center">
+                Quantity
+              </th>
+              <th class="text-center">
+                customer Email id 
+              </th>
+              <th class="text-center">
+                Date/Time 
+              </th>
+              <th class="text-center">
+                image
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in order %}
+            <tr>
+              
+              <td class="text-center" >
+                  <p>
+                    {{i.id}}
+                  </p>
+              </td>
+              <td class="text-center" >
+                <p>
+                  {{i.totalpri}}
+                </p> 
+              </td>
+              <td class="text-center" >
+                <p>
+                  {{i.quantity}}
+                </p>
+              </td>
+              <td class="text-center">
+                
+                <p>
+                  {{i.cus_id.email}}
+                </p>
+              </td>
+              <td class="text-center" > 
+                <p>
+                  {{i.orderdate}}
+                </p>
+              </td>
+              <td class="text-center" >
+                <div >
+                  
+                  <img src="{{i.pid.pic.url}}" alt="AdminLTELogo" height="60" width="60" style="border-radius: 50%;">
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <!-- /.card-body -->
+    </div>
+  </div>
+</div>
+<script>
+  function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }       
+    }
+  }
+  </script>
+
+{% endblock %}

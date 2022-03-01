@@ -1,0 +1,16 @@
+<html>
+<head>
+    <title>Callback</title>
+</head>
+<body>
+    <h2>payment successful: </h2>                    <br>
+    <h3> Checksum Verification: {{ message }} </h3> <br>
+    MID: {{ MID }}                                  <br>
+    TXNID: {{ TXNID }}                              <br>
+    ORDERID: {{ ORDERID }}                          <br>
+    BANKTXNID: {{ BANKTXNID }}                      <br>
+    TXNAMOUNT: {{ TXNAMOUNT }}                      <br>
+    CURRENCY: {{ CURRENCY }}                        <br>
+    <a href="{% url 'login' %}">Back to home page</a>
+</body>
+</html>

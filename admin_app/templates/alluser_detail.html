@@ -1,0 +1,374 @@
+{% extends 'main_admin.html' %}
+{%load static %}
+{% block content %}
+<style> 
+  input[type=text] {
+    width: 250px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+  }
+  
+  input[type=text]:focus {
+    width: 100%;
+  }
+</style>
+<div class="content-wrapper">
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="card-body p-0">
+        <!-- <form action="" method="POST">
+          {% csrf_token %}
+          <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Enter Product Name.." name="search" title="Type in a name">
+        </form><br> -->
+        <h1 style="text-align: center;" >Customer </h1>
+        <table class="table table-striped projects" id="myTable">
+          <thead>
+            <tr>
+              <th class="text-center" >
+                Name
+              </th>
+              <th class="text-center" >
+                Contact No.
+              </th>
+              <th class="text-center" >
+                Address
+              </th>
+              <th class="text-center">
+                City
+              </th>
+              <th class="text-center">
+                pincode
+              </th>
+              <th class="text-center" >
+                image 
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in cus %}
+            <tr>
+              <td class="text-center" >
+                  <p>
+                    {{i.first_name}} {{i.last_name}}
+                  </p>
+              </td>
+              <td class="text-center" >
+                <p>
+                  {{i.phone}}
+                </p> 
+              </td>
+              <td class="text-center" >
+                <p>
+                  {{i.address}}
+                </p>
+              </td>
+              <td class="text-center">
+                
+                <p>
+                  {{i.city}}
+                </p>
+              </td>
+              <td class="text-center" >  
+                <p>
+                  {{i.pincode}}
+                </p>
+              </td>
+              <td class="text-center" >
+                <p>
+                  <img src="{{i.img.url}}" height="60" width="60" style="border-radius: 50%;" 
+                </p>
+              </td>
+              <td class="project-actions text-right">
+                <a class="btn btn-info btn-sm" href="{% url 'edituser_detail' pk=i.user_id.id %}">
+                  <i class="fas fa-pencil-alt"></i>
+                  Edit
+                </a>
+                <a class="btn btn-danger btn-sm" href="{% url 'removeuser_details' pk=i.user_id.id %}">
+                  <i class="fas fa-trash"></i>
+                  Delete
+                </a>
+              </td>
+            </tr>
+          </tbody>
+          {% endfor %}
+        </table>
+      </div><br><br><br>
+      <div class="card-body p-0">
+        <!-- <form action="" method="POST">
+          {% csrf_token %}
+          <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Enter Product Name.." name="search" title="Type in a name">
+        </form><br> -->
+        <h1 style="text-align: center;" >Farmer Details</h1>
+        <table class="table table-striped projects" id="myTable">
+          <thead>
+            <tr>
+              <th class="text-center" >
+                Name
+              </th>
+              <th class="text-center" >
+                Contact No.
+              </th>
+              <th class="text-center" >
+                Address
+              </th>
+              <th class="text-center">
+                City
+              </th>
+              <th class="text-center">
+                pincode
+              </th>
+              <th class="text-center" >
+                image 
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in far %}
+            <tr>
+              <td class="text-center" >
+                  <p>
+                    {{i.first_name}} {{i.last_name}}
+                  </p>
+              </td>
+              <td class="text-center" >
+                <p>
+                  {{i.phone}}
+                </p> 
+              </td>
+              <td class="text-center" >
+                <p>
+                  {{i.address}}
+                </p>
+              </td>
+              <td class="text-center">
+                
+                <p>
+                  {{i.city}}
+                </p>
+              </td>
+              <td class="text-center" >  
+                <p>
+                  {{i.pincode}}
+                </p>
+              </td>
+              <td class="text-center" >
+                <p>
+                  <img src="{{i.img.url}}" height="60" width="60" style="border-radius: 50%;" 
+                </p>
+              </td>
+              <td class="project-actions text-right">
+                <a class="btn btn-info btn-sm" href="{% url 'edituser_detail' pk=i.user_id.id %}">
+                  <i class="fas fa-pencil-alt"></i>
+                  Edit
+                </a>
+                <a class="btn btn-danger btn-sm" href="{% url 'removeuser_details' pk=i.user_id.id %}">
+                  <i class="fas fa-pencil-alt"></i>
+                  Delete
+                </a>
+                <a class="btn btn-primary btn-sm" href="{% url 'allproduct_detail' pk=i.user_id.id %}">
+                  <i class="fas fa-folder"></i>
+                  Product Details
+                </a>
+              </td>
+            </tr>
+          </tbody>
+          {% endfor %}
+        </table><br><br>
+        <div class="card-body p-0">
+        <!-- <form action="" method="POST">
+          {% csrf_token %}
+          <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Enter Product Name.." name="search" title="Type in a name">
+        </form><br> -->
+        <h1 style="text-align: center;" >Nursery Details</h1>
+        <table class="table table-striped projects" id="myTable">
+          <thead>
+            <tr>
+              <th class="text-center" >
+                Name
+              </th>
+              <th class="text-center" >
+                Contact No.
+              </th>
+              <th class="text-center" >
+                Address
+              </th>
+              <th class="text-center">
+                City
+              </th>
+              <th class="text-center">
+                pincode
+              </th>
+              <th class="text-center" >
+                image 
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in nur %}
+            <tr>
+              <td class="text-center" >
+                  <p>
+                    {{i.first_name}} {{i.last_name}}
+                  </p>
+              </td>
+              <td class="text-center" >
+                <p>
+                  {{i.phone}}
+                </p> 
+              </td>
+              <td class="text-center" >
+                <p>
+                  {{i.address}}
+                </p>
+              </td>
+              <td class="text-center">
+                
+                <p>
+                  {{i.city}}
+                </p>
+              </td>
+              <td class="text-center" >  
+                <p>
+                  {{i.pincode}}
+                </p>
+              </td>
+              <td class="text-center" >
+                <p>
+                  <img src="{{i.img.url}}" height="60" width="60" style="border-radius: 50%;" 
+                </p>
+              </td>
+              <td class="project-actions text-right">
+                <a class="btn btn-info btn-sm" href="{% url 'edituser_detail' pk=i.user_id.id %}">
+                  <i class="fas fa-pencil-alt"></i>
+                  Edit
+                </a>
+                <a class="btn btn-danger btn-sm" href="{% url 'removeuser_details' pk=i.user_id.id %}">
+                  <i class="fas fa-pencil-alt"></i>
+                  Delete
+                </a>
+                <a class="btn btn-primary btn-sm" href="{% url 'allproduct_detail' pk=i.user_id.id %}">
+                  <i class="fas fa-folder"></i>
+                  Product Details
+                </a>
+              </td>
+            </tr>
+          </tbody>
+          {% endfor %}
+        </table><br><br>
+        <div class="card-body p-0">
+        <!-- <form action="" method="POST">
+          {% csrf_token %}
+          <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Enter Product Name.." name="search" title="Type in a name">
+        </form><br> -->
+        <h1 style="text-align: center;" >Agro shop Details</h1>
+        <table class="table table-striped projects" id="myTable">
+          <thead>
+            <tr>
+              <th class="text-center" >
+                Name
+              </th>
+              <th class="text-center" >
+                Contact No.
+              </th>
+              <th class="text-center" >
+                Address
+              </th>
+              <th class="text-center">
+                City
+              </th>
+              <th class="text-center">
+                pincode
+              </th>
+              <th class="text-center" >
+                image 
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in agro %}
+            <tr>
+              <td class="text-center" >
+                  <p>
+                    {{i.first_name}} {{i.last_name}}
+                  </p>
+              </td>
+              <td class="text-center" >
+                <p>
+                  {{i.phone}}
+                </p> 
+              </td>
+              <td class="text-center" >
+                <p>
+                  {{i.address}}
+                </p>
+              </td>
+              <td class="text-center">
+                
+                <p>
+                  {{i.city}}
+                </p>
+              </td>
+              <td class="text-center" >  
+                <p>
+                  {{i.pincode}}
+                </p>
+              </td>
+              <td class="text-center" >
+                <p>
+                  <img src="{{i.img.url}}" height="60" width="60" style="border-radius: 50%;" 
+                </p>
+              </td>
+              <td class="project-actions text-right">
+                <a class="btn btn-info btn-sm" href="{% url 'edituser_detail' pk=i.user_id.id %}">
+                  <i class="fas fa-pencil-alt"></i>
+                  Edit
+                </a>
+                <a class="btn btn-danger btn-sm" href="{% url 'removeuser_details' pk=i.user_id.id %}">
+                  <i class="fas fa-pencil-alt"></i>
+                  Delete
+                </a>
+                <a class="btn btn-primary btn-sm" href="{% url 'allproduct_detail' pk=i.user_id.id %}">
+                  <i class="fas fa-folder"></i>
+                  Product Details
+                </a>
+              </td>
+            </tr>
+          </tbody>
+          {% endfor %}
+        </table>
+      </div>
+      </div>
+      </div>
+      <!-- /.card-body -->
+    </div>
+  </div>
+</div>
+<script>
+  function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }       
+    }
+  }
+  </script>
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends 'main.html' %}
+{%load static %}
+{% block content %}
+<div class="content-wrapper">
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="card-body p-0">
+        <table class="table table-striped projects">
+          <thead>
+            <tr>
+              <th class="text-center" >
+                product image
+              </th>
+              <th class="text-center" >
+                product Name
+              </th>
+              <th class="text-center">
+                product Price
+              </th>
+              <th class="text-center">
+                product Quantity
+              </th>
+              <th class="text-center">
+                Amount
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in addtocart %}
+            <tr class="border">
+              {% csrf_token%}
+              <input type="hidden" class="product_id" value="{{i.p_id}}">
+              <input type="hidden" class="cart_id" value="{{i.id}}">
+              <td class="text-center" >
+                <p>
+                  <a href="{{i.p_id.pic.url}}">
+                  <img src="{{i.p_id.pic.url}}" height="60" width="60" style="border-radius: 50%;" >
+                </a>
+                </p>
+              </td>
+              <td class="text-center" >
+                  <p>
+                    {{i.p_id.product_name}} 
+                  </p>
+              </td>
+              <td class="text-center">
+                
+                <p>
+                  <input type="text" name="product_price" class="price" style="width:70px;text-align:center; border-radius: 5px;" value="{{i.p_id.Price}}" readonly> 
+                </p>
+              </td>
+              <td class="text-center" >  
+                <p>
+                 <input type="number" name="qty" style="width:70px;text-align:center; border-radius: 5px;" min="1" max="20" class="qty" value="{{i.qty}}">
+                </p>
+              </td>
+              <td class="text-center" >  
+                <p>
+                 <span id="{{i.id}}">{{i.total_price}}</span>
+                </p>
+              </td>
+              <td class="project-actions text-right">
+                <a href="{% url 'dele_record' pk=i.id %}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <div style="width: 20%; margin: 50px 80%; text-align: center; ">
+          <b class="sub_total">Total:  {{totalamount}}</b>
+          <button type="button" class="btn btn-block btn-outline-info btn-flat" ><a href="{% url 'addpayment_cus' %}"> Order</a></button>
+        </div>
+      </div>
+      <!-- /.card-body -->
+    </div>
+  </div>
+</div>
+<script>
+  $(".qty").change(function(){
+    var product_id = $(this).closest(".border").find('.product_id').val();
+    var qty = $(this).closest(".border").find('.qty').val();
+    var price = $(this).closest(".border").find('.price').val();
+    var cart_id = $(this).closest(".border").find('.cart_id').val();
+    var token = $('input[name=csrfmiddlewaretoken]').val();
+    $.ajax({
+      method:"POST",
+      url : '{% url "update_qty_c" %}',
+      data:
+      {
+        'product_id':product_id,
+        'cart_id':cart_id,
+        'qty':qty,
+        'price':price,
+        csrfmiddlewaretoken:token,
+      },
+      success:function(data)
+      {
+        $("#"+cart_id).html(data.total);
+        $(".sub_total").html(data.sub_total);
+
+      }
+    });
+  });
+</script>
+{% endblock %}

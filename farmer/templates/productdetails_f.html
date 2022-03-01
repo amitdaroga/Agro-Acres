@@ -1,0 +1,90 @@
+{% extends 'main_f.html' %}
+{%load static %}
+{% block content %}
+<div class="content-wrapper" >
+	<!-- Content Header (Page header) -->
+	<div class="content-header">
+		<div class="container-fluid">
+			<section class="content">
+				<div class="container-fluid">
+					<div class="card card-default">
+						<div class="card-header">
+							<h3 class="card-title">Product Details update</h3>
+						</div>
+						<!-- /.card-header -->
+						{% for i in product %}
+						<form action="{% url 'update_product_f' %}" method="post" enctype="multipart/form-data">
+							{% csrf_token %}
+							<p style="color: black; font-size: 20px; text-align: center;"><b>{{msg}}</b><hr></p>
+							<div class="card-body">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<img src="{{i.pic.url}}" alt="AdminLTELogo" height="100" width="100" style="border-radius: 50%;"> 
+										</div>
+										<div class="form-group">
+											<input type="hidden" name="id" class="form-control" value="{{i.id}}">
+										</div>
+										<div class="form-group">
+											<label>product category update</label>
+											<input type="text" class="form-control" value="{{i.pro_category}}" readonly> 
+										</div>
+										<!-- /.form-group -->
+										<div class="form-group">
+											<label>product Name</label>
+											<input type="text" class="form-control" value="{{i.product_name}}" readonly>
+										</div>
+										<!-- /.form-group -->
+										<div class="row">
+											<div class="col-12 col-sm-12">
+												<div class="form-group">
+													<label>Product Description</label>
+													<textarea id="inputDescription" class="form-control" rows="4" placeholder="{{i.pro_description}}" readonly></textarea>
+												</div>
+												<!-- /.form-group -->
+											</div>
+											<!-- /.col -->
+											<!-- /.col -->
+										</div>
+									</div>
+									<!-- /.col -->
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Product Price</label>
+											<input type="number" name="price"  class="form-control" value="{{i.Price}}" style="width: 100%;" >
+										</div>
+										<!-- /.form-group -->
+										<div class="form-group">
+											<label>product quantity</label>
+											<input type="number" name="pquantity" class="form-control" value="{{i.pro_quantity}}">
+										</div>
+										<!-- /.form-group -->
+										<div class="form-group">
+											<label>product Enable/disable</label>
+											<select class="form-control" name="enable" style="text-align: center;">
+												<option value="{{i.enable}}">Current {{i.enable}}</option>
+												<option value="Enable">Enable</option>
+												<option value="Disable">Disable</option>
+											</select>
+										</div>
+									</div>
+									<!-- /.col -->
+								</div>
+								<!-- /.row -->
+								
+								<div>
+									<input type="submit" name="submit" class="btn btn-primary" value="Submit" style="width: 100%;">
+								</div>
+							</div>
+							<!-- /.card-body -->
+						</form>
+						{% endfor %}
+						<!-- /.row -->
+					</div>
+					<!-- /.card-body -->
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+{% endblock%}
